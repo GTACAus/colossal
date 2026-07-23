@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homer - De-Extinction Scientist Sidebar</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0f1117;
+            color: #e6e8ee;
+        }
+
+        /* --- LAYOUT CONTAINER --- */
+        .app-container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* --- SIDEBAR STYLING --- */
+        #homer-sidebar {
+            width: 360px;
+            min-width: 360px;
+            height: 100vh;
+            background-color: #0f1117;
+            color: #e6e8ee;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #2a2e3d;
+            z-index: 10;
+        }
+
+        .homer-header {
+            padding: 16px;
+            background-color: #161922;
+            border-bottom: 1px solid #2a2e3d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .homer-header h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #4da6ff;
+        }
+        .homer-reset-btn {
+            background: none;
+            border: 1px solid #3b4254;
+            color: #a0a7b8;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+        .homer-reset-btn:hover {
+            background: #222734;
+            color: #fff;
+        }
+
+        /* --- CLASSROOM TASK FORMATTING --- */
+        .homer-task-container {
+            padding: 20px 24px;
+            background-color: #141720;
+            border-bottom: 2px dashed #2a2e3d;
+            flex-shrink: 0;
+            max-height: none;
+            overflow-y: visible;
+        }
+        .homer-task-tagline {
+            font-style: italic;
+            color: #64748b;
+            margin: 0 0 20px 0;
+            text-align: center;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+        .homer-task-step {
+            color: #60a5fa;
+            font-weight: 700;
+            font-size: 14px;
+            margin: 0 0 10px 0;
+            line-height: 1.4;
+        }
+        .homer-task-list {
+            margin: 0 0 16px 0;
+            padding-left: 24px;
+            color: #f8fafc;
+            font-size: 13px;
+            font-weight: 500;
+            list-style-type: square;
+            display: block;
+            grid-template-columns: none;
+            gap: normal;
+        }
+        .homer-task-list li {
+            margin-bottom: 6px;
+        }
+        .homer-task-desc {
+            margin: 0 0 20px 0;
+            padding-left: 12px;
+            font-size: 12px;
+            color: #94a3b8;
+            line-height: 1.5;
+            border-left: 2px solid #334155;
+        }
+
+        /* --- CHAT MESSAGES --- */
+        .homer-messages {
+            flex: 1;
+            min-height: 0; /* CRITICAL FIX: Forces element to respect viewport bounds */
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .homer-msg {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+        .homer-msg.user {
+            align-self: flex-end;
+            background-color: #2563eb;
+            color: #ffffff;
+            border-bottom-right-radius: 2px;
+        }
+        .homer-msg.bot {
+            align-self: flex-start;
+            background-color: #1e2330;
+            color: #d1d5db;
+            border-bottom-left-radius: 2px;
+            border: 1px solid #2a2e3d;
+        }
+
+        /* --- SUGGESTIONS CHIPS --- */
+        .homer-suggestions {
+            padding: 8px 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            background-color: #0f1117;
+            flex-shrink: 0;
+        }
+        .homer-suggestions:empty {
+            display: none; /* Collapse container if there are no suggestions */
+        }
+        .homer-chip {
+            background: #1a202c;
+            border: 1px solid #303846;
+            color: #93c5fd;
+            padding: 6px 10px;
+            border-radius: 14px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .homer-chip:hover {
+            background: #2563eb;
+            color: #fff;
+        }
+
+        /* --- INPUT AREA --- */
+        .homer-input-container {
+            padding: 12px 16px;
+            border-top: 1px solid #2a2e3d;
+            background-color: #161922;
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        .homer-input {
+            flex: 1;
+            background: #0f1117;
+            border: 1px solid #2a2e3d;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            outline: none;
+        }
+        .homer-input:focus {
+            border-color: #2563eb;
+        }
+        .homer-send-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        .homer-send-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* --- RIGHT CONTENT AREA (IFRAME) --- */
+        .content-pane {
+            flex: 1;
+            height: 100vh;
+            background: #ffffff;
+        }
+        .content-pane iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div id="homer-sidebar">
+            <div class="homer-header">
+                <h3>🦣 Ask Homer</h3>
+                <button class="homer-reset-btn" id="homer-reset">Reset Chat</button>
+            </div>
+
+            <div class="homer-task-container">
+                <p class="homer-task-tagline">"Restoring earth. One species at a time."</p>
+                
+                <div class="homer-task-step">1) Choose a species:</div>
+                <ul class="homer-task-list">
+                    <li>Woolly mammoth</li>
+                    <li>Thylacine</li>
+                    <li>Dodo</li>
+                    <li>Dire wolf</li>
+                    <li>Moa</li>
+                    <li>Bluebuck</li>
+                </ul>
+                <div class="homer-task-step">2) Explore how Colossal Laboratories and Biosciences are trying to bring back extinct species to reshape the future of conservation.</div>
+                
+                <div class="homer-task-step" style="margin-top: 16px; margin-bottom: 0;">3) Chat with Homer about what you have found, and what you want to know more about.</div>
+            </div>
+
+            <div class="homer-messages" id="homer-chat-box"></div>
+            <div class="homer-suggestions" id="homer-suggestions-box"></div>
+            
+            <div class="homer-input-container">
+                <input type="text" id="homer-input" class="homer-input" placeholder="Type a message..." />
+                <button id="homer-send" class="homer-send-btn">Send</button>
+            </div>
+        </div>
+
+        <!-- Main Content Area with iframe -->
+        <div class="content-pane">
+            <iframe src="https://colossal.com/species/" title="Colossal Species"></iframe>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = "https://gtac.made-this.app/colossal/API";
+        const DEFAULT_WELCOME = "Hello! I'm Homer. Ask me anything about paleogenomics, ancient DNA, or bringing back extinct species!";
+
+        // 1. Manage persistent Session ID using localStorage instead of GM_setValue
+        let sessionId = localStorage.getItem("homer_session_id");
+        if (!sessionId) {
+            sessionId = "user_" + Math.random().toString(36).substring(2, 11) + "_" + Date.now();
+            localStorage.setItem("homer_session_id", sessionId);
+        }
+
+        // Load or initialize stored chat history
+        let chatHistory = JSON.parse(localStorage.getItem("homer_chat_history")) || [
+            { text: DEFAULT_WELCOME, sender: "bot" }
+        ];
+
+        // 2. Element references
+        const chatBox = document.getElementById("homer-chat-box");
+        const inputEl = document.getElementById("homer-input");
+        const sendBtn = document.getElementById("homer-send");
+        const resetBtn = document.getElementById("homer-reset");
+        const suggestionsBox = document.getElementById("homer-suggestions-box");
+
+        function appendMessage(text, sender, save = true) {
+            const msgDiv = document.createElement("div");
+            msgDiv.className = `homer-msg ${sender}`;
+            msgDiv.innerText = text;
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            if (save) {
+                chatHistory.push({ text, sender });
+                localStorage.setItem("homer_chat_history", JSON.stringify(chatHistory));
+            }
+        }
+
+        function renderHistory() {
+            chatBox.innerHTML = "";
+            chatHistory.forEach(msg => appendMessage(msg.text, msg.sender, false));
+
+            const lastBot = [...chatHistory].reverse().find(m => m.sender === "bot");
+            const lastUser = [...chatHistory].reverse().find(m => m.sender === "user");
+            if (lastBot && lastUser) {
+                fetchSuggestions(lastUser.text, lastBot.text);
+            }
+        }
+
+        async function sendMessage(messageText) {
+            const text = messageText || inputEl.value.trim();
+            if (!text) return;
+
+            inputEl.value = "";
+            suggestionsBox.innerHTML = "";
+            appendMessage(text, "user");
+
+            try {
+                const res = await fetch(`${API_BASE}/chat`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message: text, session_id: sessionId })
+                });
+
+                if (!res.ok) {
+                    const errText = await res.text();
+                    appendMessage(`Server Error (${res.status}): ${errText.slice(0, 100)}`, "bot");
+                    return;
+                }
+
+                const contentType = res.headers.get("content-type");
+                if (contentType && contentType.includes("application/json")) {
+                    const data = await res.json();
+
+                    if (data.reply) {
+                        appendMessage(data.reply, "bot");
+                        fetchSuggestions(text, data.reply);
+                    } else {
+                        appendMessage("Error: " + (data.error || "Failed to reach Homer"), "bot");
+                    }
+                } else {
+                    appendMessage("Received non-JSON response from server.", "bot");
+                }
+            } catch (err) {
+                appendMessage("Connection error: " + err.message, "bot");
+            }
+        }
+
+        async function fetchSuggestions(lastUserMsg, lastBotMsg) {
+            try {
+                const res = await fetch(`${API_BASE}/suggest`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ last_user: lastUserMsg, last_bot: lastBotMsg })
+                });
+                const data = await res.json();
+
+                if (data.suggestions && Array.isArray(data.suggestions)) {
+                    suggestionsBox.innerHTML = "";
+                    data.suggestions.forEach(q => {
+                        const chip = document.createElement("div");
+                        chip.className = "homer-chip";
+                        chip.innerText = q;
+                        chip.addEventListener("click", () => sendMessage(q));
+                        suggestionsBox.appendChild(chip);
+                    });
+                }
+            } catch (e) {}
+        }
+
+        resetBtn.addEventListener("click", async () => {
+            try {
+                await fetch(`${API_BASE}/reset`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ session_id: sessionId })
+                });
+            } catch (e) {}
+
+            const resetMsg = "Hi there! I'm Homer. Ask me anything about the de-extinction efforts made at Colossal.";
+            chatHistory = [{ text: resetMsg, sender: "bot" }];
+            localStorage.setItem("homer_chat_history", JSON.stringify(chatHistory));
+
+            chatBox.innerHTML = "";
+            appendMessage(resetMsg, "bot", false);
+            suggestionsBox.innerHTML = "";
+        });
+
+        sendBtn.addEventListener("click", () => sendMessage());
+        inputEl.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") sendMessage();
+        });
+
+        renderHistory();
+    </script>
+</body>
+</html>
