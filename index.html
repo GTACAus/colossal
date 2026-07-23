@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Homer - De-Extinction Scientist Sidebar</title>
     <style>
         * {
@@ -12,7 +12,7 @@
             margin: 0;
             padding: 0;
             width: 100%;
-            height: 100vh;
+            height: 100%;
             overflow: hidden;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #0f1117;
@@ -24,13 +24,14 @@
             display: flex;
             width: 100vw;
             height: 100vh;
+            height: 100dvh;
         }
 
         /* --- SIDEBAR STYLING --- */
         #homer-sidebar {
-            width: 360px;
-            min-width: 360px;
-            height: 100vh;
+            width: 340px;
+            min-width: 340px;
+            height: 100%;
             background-color: #0f1117;
             color: #e6e8ee;
             box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
@@ -41,7 +42,7 @@
         }
 
         .homer-header {
-            padding: 10px 14px; /* Nudged down vertical padding for iPad efficiency */
+            padding: 6px 10px;
             background-color: #161922;
             border-bottom: 1px solid #2a2e3d;
             display: flex;
@@ -51,7 +52,7 @@
         }
         .homer-header h3 {
             margin: 0;
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 600;
             color: #4da6ff;
         }
@@ -59,9 +60,9 @@
             background: none;
             border: 1px solid #3b4254;
             color: #a0a7b8;
-            padding: 3px 6px;
+            padding: 2px 5px;
             border-radius: 4px;
-            font-size: 11px;
+            font-size: 10px;
             cursor: pointer;
         }
         .homer-reset-btn:hover {
@@ -69,69 +70,66 @@
             color: #fff;
         }
 
-        /* --- CLASSROOM TASK FORMATTING --- */
+        /* --- CLASSROOM TASK FORMATTING (Collapsible/Scrollable for Landscape/Portrait) --- */
         .homer-task-container {
-            padding: 10px 14px; /* Nudged down spacing to preserve vertical room */
+            padding: 6px 10px;
             background-color: #141720;
             border-bottom: 2px dashed #2a2e3d;
             flex-shrink: 0;
-            max-height: none;
-            overflow-y: visible;
+            max-height: 100px; /* Kept compact so it never blocks the top/bottom on iPad orientation shifts */
+            overflow-y: auto;
         }
         .homer-task-tagline {
             font-style: italic;
             color: #64748b;
-            margin: 0 0 8px 0;
+            margin: 0 0 2px 0;
             text-align: center;
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 0.5px;
         }
         .homer-task-step {
             color: #60a5fa;
             font-weight: 700;
-            font-size: 13px;
-            margin: 0 0 4px 0;
-            line-height: 1.3;
+            font-size: 11px;
+            margin: 0 0 2px 0;
+            line-height: 1.2;
         }
         .homer-task-list {
-            margin: 0 0 8px 0;
-            padding-left: 20px;
+            margin: 0 0 4px 0;
+            padding-left: 16px;
             color: #f8fafc;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 500;
             list-style-type: square;
-            display: block;
-            grid-template-columns: none;
-            gap: normal;
         }
         .homer-task-list li {
-            margin-bottom: 2px;
+            margin-bottom: 1px;
         }
         .homer-task-desc {
             margin: 0;
-            padding-left: 10px;
-            font-size: 11px;
+            padding-left: 6px;
+            font-size: 10px;
             color: #94a3b8;
-            line-height: 1.4;
+            line-height: 1.2;
             border-left: 2px solid #334155;
         }
 
         /* --- CHAT MESSAGES --- */
         .homer-messages {
             flex: 1;
-            min-height: 0; /* CRITICAL FIX: Forces element to respect viewport bounds */
+            min-height: 0; /* CRITICAL: Allows inner container scrolling without overflowing layout */
             overflow-y: auto;
-            padding: 12px;
+            padding: 8px 10px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 6px;
         }
         .homer-msg {
             max-width: 85%;
-            padding: 8px 12px; /* Nudged up/tighter padding for iPad visibility */
-            border-radius: 12px;
-            font-size: 12px;
-            line-height: 1.4;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            line-height: 1.3;
             word-wrap: break-word;
         }
         .homer-msg.user {
@@ -150,7 +148,7 @@
 
         /* --- SUGGESTIONS CHIPS --- */
         .homer-suggestions {
-            padding: 6px 12px; /* Nudged up */
+            padding: 4px 10px;
             display: flex;
             flex-wrap: wrap;
             gap: 4px;
@@ -158,15 +156,15 @@
             flex-shrink: 0;
         }
         .homer-suggestions:empty {
-            display: none; /* Collapse container if there are no suggestions */
+            display: none;
         }
         .homer-chip {
             background: #1a202c;
             border: 1px solid #303846;
             color: #93c5fd;
-            padding: 4px 8px; /* Compacted for iPad screen space */
-            border-radius: 12px;
-            font-size: 11px;
+            padding: 3px 6px;
+            border-radius: 10px;
+            font-size: 10px;
             cursor: pointer;
             transition: background 0.2s;
         }
@@ -177,11 +175,11 @@
 
         /* --- INPUT AREA --- */
         .homer-input-container {
-            padding: 8px 12px; /* Nudged up bottom padding to prevent keyboard overflow on tablets */
+            padding: 6px 10px;
             border-top: 1px solid #2a2e3d;
             background-color: #161922;
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-shrink: 0;
         }
         .homer-input {
@@ -189,9 +187,9 @@
             background: #0f1117;
             border: 1px solid #2a2e3d;
             color: #fff;
-            padding: 6px 10px; /* Tighter input box height */
+            padding: 5px 8px;
             border-radius: 6px;
-            font-size: 12px;
+            font-size: 11px;
             outline: none;
         }
         .homer-input:focus {
@@ -201,11 +199,11 @@
             background: #2563eb;
             color: white;
             border: none;
-            padding: 6px 12px;
+            padding: 5px 10px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 12px;
+            font-size: 11px;
         }
         .homer-send-btn:hover {
             background: #1d4ed8;
@@ -214,7 +212,7 @@
         /* --- RIGHT CONTENT AREA (IFRAME) --- */
         .content-pane {
             flex: 1;
-            height: 100vh;
+            height: 100%;
             background: #ffffff;
         }
         .content-pane iframe {
@@ -239,16 +237,11 @@
                 
                 <div class="homer-task-step">1) Choose a species:</div>
                 <ul class="homer-task-list">
-                    <li>Woolly mammoth</li>
-                    <li>Thylacine</li>
-                    <li>Dodo</li>
-                    <li>Dire wolf</li>
-                    <li>Moa</li>
-                    <li>Bluebuck</li>
+                    <li>Woolly mammoth • Thylacine • Dodo</li>
+                    <li>Dire wolf • Moa • Bluebuck</li>
                 </ul>
-                <div class="homer-task-step">2) Explore how Colossal Laboratories and Biosciences are trying to bring back extinct species to reshape the future of conservation.</div>
-                
-                <div class="homer-task-step" style="margin-top: 10px; margin-bottom: 0;">3) Chat with Homer about what you have found, and what you want to know more about.</div>
+                <div class="homer-task-desc">2) Explore how Colossal brings back extinct species.</div>
+                <div class="homer-task-step" style="margin-top: 2px; margin-bottom: 0;">3) Chat with Homer about your findings.</div>
             </div>
 
             <div class="homer-messages" id="homer-chat-box"></div>
@@ -270,7 +263,7 @@
         const API_BASE = "https://gtac.made-this.app/colossal/API";
         const DEFAULT_WELCOME = "Hello! I'm Homer. Ask me anything about paleogenomics, ancient DNA, or bringing back extinct species!";
 
-        // 1. Manage persistent Session ID using localStorage instead of GM_setValue
+        // 1. Manage persistent Session ID using localStorage
         let sessionId = localStorage.getItem("homer_session_id");
         if (!sessionId) {
             sessionId = "user_" + Math.random().toString(36).substring(2, 11) + "_" + Date.now();
