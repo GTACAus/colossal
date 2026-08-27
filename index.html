@@ -76,7 +76,7 @@
             background-color: #141720;
             border-bottom: 2px dashed #2a2e3d;
             flex-shrink: 0;
-            max-height: 250px; 
+            max-height: 250px;
             overflow-y: auto;
         }
         .homer-task-tagline {
@@ -251,7 +251,7 @@
 
             <div class="homer-messages" id="homer-chat-box"></div>
             <div class="homer-suggestions" id="homer-suggestions-box"></div>
-            
+
             <div class="homer-input-container">
                 <input type="text" id="homer-input" class="homer-input" placeholder="Type a message..." />
                 <button id="homer-send" class="homer-send-btn">Send</button>
@@ -260,7 +260,34 @@
 
         <!-- Main Content Area with iframe -->
         <div class="content-pane">
-            <iframe src="https://colossal.com/species/" title="Colossal Species"></iframe>
+            <!--
+              SANDBOX = the newsletter popup + cookie consent banner suppressor.
+
+              colossal.com is a different origin, so we CANNOT reach into this iframe
+              to hide .spu-container or .consent-banner. The browser forbids it.
+
+              Instead we exploit how those two elements are built. In the HTML that
+              colossal.com actually serves, both already ship hidden:
+                  <div class="wppopups-whole" style="display: none">   <- newsletter popup
+                  <div id="consent-banner" ... hidden>                <- consent banner
+              JavaScript is what reveals them (the popup on a 3-second timer).
+              Omitting "allow-scripts" below means no JS runs inside the frame, so
+              neither element is ever un-hidden. Both stay invisible and inert.
+
+              The species page survives this fine: all six species, their links and
+              all 104 images are server-rendered with real src attributes (there is
+              no JS lazy-loading), and the hero fade-ins are CSS keyframes, not JS.
+
+              Tokens deliberately NOT granted:
+                allow-scripts        -> the whole point. Granting it brings both back.
+                allow-top-navigation -> stops the frame navigating away from this page.
+                allow-popups         -> keeps students inside the frame.
+                                        Add it if you need target="_blank" links to work.
+            -->
+            <iframe src="https://colossal.com/species/"
+                    sandbox="allow-same-origin allow-forms"
+                    referrerpolicy="no-referrer"
+                    title="Colossal Species"></iframe>
         </div>
     </div>
 
