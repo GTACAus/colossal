@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F9F6E7">
+<title>Spot the stranger — dunnart spleen follicles</title>
+<meta name="description" content="A station sign for Year 7-8: what the red-brown stain around a dunnart spleen follicle shows, and why it matters to Tasmanian devils.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ------------------------------------------------------------------
+     Standalone station sign. Nothing outside this file except the web
+     font and the GTAC logo, both of which degrade gracefully offline.
+  ------------------------------------------------------------------ */
+  :root {
+    --eggshell: #F9F6E7;
+    --sodium-flame: #FF6D3A;
+    --cadmium-yellow: #FFCD1F;
+    --chlorophyll-green: #00BC74;
+    --aquamarine: #6BE7BE;
+    --lavender: #C0ADFF;
+    --cobalt-blue: #4C34E5;
+    --onyx: #272A24;
+
+    --bg: var(--eggshell);
+    --surface: #FFFFFF;
+    --surface-2: #FFFDF3;
+    --line: rgba(39, 42, 36, .14);
+    --text: var(--onyx);
+    --muted: #6E7268;
+
+    --radius: 14px;
+    --font: 'Figtree', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: clamp(16px, 0.4vw + 14px, 20px);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: clamp(20px, 3vw, 44px);
+    padding-top: calc(clamp(20px, 3vw, 44px) + env(safe-area-inset-top));
+  }
+
+  /* ------------------------------------------------------------ header */
+
+  .masthead { display: flex; align-items: center; margin-bottom: 24px; }
+  .masthead img { max-height: clamp(40px, 3.4vw, 58px); width: auto; display: block; }
+  .logo-fallback {
+    font-weight: 700; font-size: 26px; letter-spacing: -.02em;
+    color: var(--cobalt-blue);
+    border-bottom: 4px solid var(--sodium-flame);
+    padding-bottom: 4px;
+  }
+
+  .eyebrow {
+    color: var(--chlorophyll-green);
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-size: .74em;
+    font-weight: 700;
+  }
+
+  h1 {
+    margin: 10px 0 18px;
+    font-size: clamp(30px, 3vw + 16px, 58px);
+    font-weight: 700;
+    letter-spacing: -.03em;
+    line-height: 1.02;
+    color: var(--cobalt-blue);
+    border-bottom: 4px solid var(--sodium-flame);
+    padding-bottom: 12px;
+  }
+
+  .lede { margin: 0; max-width: 60ch; font-size: clamp(17px, 0.5vw + 14px, 22px); }
+  .lede b { color: var(--cobalt-blue); }
+
+  h2.section {
+    margin: 38px 0 14px;
+    font-size: clamp(15px, 0.45vw + 12px, 19px);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--muted);
+    font-weight: 700;
+    border-top: 2px solid var(--line);
+    padding-top: 13px;
+  }
+
+  p { max-width: 64ch; }
+
+  /* ------------------------------------------------------- colour key */
+
+  .chan-key {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  }
+  .chan {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: var(--surface);
+    border: 2px solid var(--line);
+    border-left-width: 10px;
+    border-radius: var(--radius);
+    padding: 13px 15px;
+  }
+  .chan b { display: block; font-size: 1.02em; }
+  .chan span:not(.chan-dot) {
+    display: block; color: var(--muted);
+    font-size: .82em; line-height: 1.45; margin-top: 3px;
+  }
+  .chan span b { display: inline; color: var(--text); }
+  .chan-dot { flex: none; width: 16px; height: 16px; border-radius: 50%; margin-top: 6px; }
+
+  .chan-rim  { border-left-color: var(--sodium-flame); }
+  .chan-foll { border-left-color: var(--lavender); }
+  .chan-tis  { border-left-color: var(--aquamarine); }
+  .chan-rim  .chan-dot { background: #A8552F; box-shadow: 0 0 0 4px rgba(168,85,47,.18); }
+  .chan-foll .chan-dot { background: var(--lavender); box-shadow: 0 0 0 4px rgba(192,173,255,.22); }
+  .chan-tis  .chan-dot { background: var(--aquamarine); box-shadow: 0 0 0 4px rgba(107,231,190,.22); }
+
+  /* ---------------------------------------------------------- figures */
+
+  .fig { margin: 20px 0 0; display: grid; gap: 14px; align-items: center; }
+  @media (min-width: 760px) { .fig { grid-template-columns: 1.05fr 1fr; gap: 24px; } }
+  .fig .plate {
+    display: block; width: 100%; height: auto;
+    aspect-ratio: 4 / 3;
+    background: var(--surface-2);
+    border-radius: var(--radius);
+    border: 2px solid var(--line);
+  }
+  .fig figcaption > b { display: block; font-size: 1.02em; margin-bottom: 6px; }
+  .fig figcaption p {
+    margin: 0; font-weight: 400; font-size: .85em;
+    line-height: 1.5; color: var(--muted); max-width: none;
+  }
+
+  /* ------------------------------------------------------- highlights */
+
+  .shout {
+    margin: 22px 0 0;
+    padding: 18px 22px;
+    background: var(--cadmium-yellow);
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: clamp(17px, 0.6vw + 14px, 24px);
+    max-width: none;
+  }
+
+  .goodnews {
+    margin: 14px 0 0;
+    padding: 18px 22px;
+    border: 3px solid var(--chlorophyll-green);
+    border-radius: var(--radius);
+    background: var(--surface);
+    max-width: none;
+  }
+  .goodnews b { color: var(--chlorophyll-green); }
+
+  .aside {
+    margin: 22px 0 0;
+    padding: 14px 16px;
+    border: 2px dashed var(--line);
+    border-radius: var(--radius);
+    font-size: .85em;
+    color: var(--muted);
+    max-width: none;
+  }
+  .aside b { color: var(--text); }
+
+  /* ------------------------------------------------------------ links */
+
+  .links { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .links a {
+    display: block;
+    background: var(--surface);
+    border: 2px solid var(--line);
+    border-left: 10px solid var(--cobalt-blue);
+    border-radius: var(--radius);
+    padding: 13px 15px;
+    text-decoration: none;
+    color: var(--cobalt-blue);
+    font-weight: 700;
+    font-size: .95em;
+  }
+  .links a:hover { border-color: var(--cobalt-blue); }
+  .links span { display: block; color: var(--muted); font-weight: 400; font-size: .8em; margin-top: 3px; }
+
+  footer {
+    margin-top: 38px; padding-top: 14px;
+    border-top: 2px solid var(--line);
+    font-size: .78em; color: var(--muted);
+  }
+
+  @media print { body { background: #fff; } .fig { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <img src="https://gtac.edu.au/wp-content/themes/gtac/assets/images/logo-2024.png" alt="GTAC"
+         onerror="this.outerHTML='&lt;span class=&quot;logo-fallback&quot;&gt;GTAC&lt;/span&gt;'">
+  </div>
+
+  <div class="eyebrow">Curious Minds &middot; dunnart spleen</div>
+  <h1>Spot the stranger</h1>
+
+  <p class="lede">
+    A thin slice through the <b>spleen of a dunnart</b> &mdash; a small marsupial, and a
+    close cousin of the Tasmanian devil. The pale round patches are <b>follicles</b>:
+    crowds of white blood cells. The red-brown stain around their edges is what we came
+    to look at.
+  </p>
+
+  <!-- ============================================================ -->
+  <h2 class="section">What am I looking at?</h2>
+
+  <ul class="chan-key">
+    <li class="chan chan-foll">
+      <span class="chan-dot"></span>
+      <div>
+        <b>The follicle</b>
+        <span>A ball of white blood cells &mdash; the barracks, waiting to be told
+              where to go.</span>
+      </div>
+    </li>
+    <li class="chan chan-rim">
+      <span class="chan-dot"></span>
+      <div>
+        <b>The red-brown stain</b>
+        <span>A dye that sticks only to <b>MHC markers</b>, sitting on cells around the
+              outside of the follicle.</span>
+      </div>
+    </li>
+    <li class="chan chan-tis">
+      <span class="chan-dot"></span>
+      <div>
+        <b>Everything else</b>
+        <span>The rest of the spleen. Paler, because the dye has nothing to grab
+              onto there.</span>
+      </div>
+    </li>
+  </ul>
+
+  <figure class="fig">
+    <svg class="plate" viewBox="0 0 600 450" role="img"
+         aria-label="A follicle in a spleen section: a pale round ball of white blood cells
+                     with a ring of red-brown stained cells around its outer edge.">
+      <rect x="0" y="0" width="600" height="450" fill="#FFFDF3"/>
+
+      <g fill="#D9EFE6" opacity=".85">
+        <circle cx="90" cy="90" r="52"/><circle cx="520" cy="120" r="64"/>
+        <circle cx="120" cy="370" r="58"/><circle cx="500" cy="360" r="48"/>
+        <circle cx="300" cy="410" r="44"/>
+      </g>
+
+      <circle cx="576" cy="416" r="78" fill="#E4DBFB" stroke="#B9A7F0" stroke-width="3"/>
+      <circle cx="228" cy="214" r="112" fill="#E4DBFB" stroke="#B9A7F0" stroke-width="3"/>
+
+      <g fill="#9F8AE0" opacity=".55">
+        <circle cx="184" cy="174" r="6"/><circle cx="228" cy="156" r="5"/>
+        <circle cx="268" cy="188" r="6"/><circle cx="204" cy="224" r="5"/>
+        <circle cx="252" cy="242" r="6"/><circle cx="172" cy="252" r="5"/>
+        <circle cx="286" cy="232" r="5"/><circle cx="226" cy="276" r="6"/>
+        <circle cx="160" cy="206" r="5"/><circle cx="282" cy="276" r="5"/>
+        <circle cx="192" cy="294" r="5"/><circle cx="242" cy="202" r="5"/>
+      </g>
+
+      <g fill="#A8552F">
+        <circle cx="228" cy="92" r="9"/><circle cx="283" cy="103" r="8"/>
+        <circle cx="326" cy="136" r="9"/><circle cx="345" cy="187" r="8"/>
+        <circle cx="343" cy="240" r="9"/><circle cx="317" cy="288" r="8"/>
+        <circle cx="273" cy="318" r="9"/><circle cx="220" cy="328" r="8"/>
+        <circle cx="169" cy="317" r="9"/><circle cx="127" cy="286" r="8"/>
+        <circle cx="107" cy="237" r="9"/><circle cx="109" cy="184" r="8"/>
+        <circle cx="135" cy="137" r="9"/><circle cx="179" cy="104" r="8"/>
+      </g>
+
+      <g stroke="#46606E" stroke-width="1.6" opacity=".8" fill="none">
+        <path d="M392 168 L352 180"/>
+        <path d="M392 250 L270 236"/>
+        <path d="M188 54 L128 74"/>
+      </g>
+      <g fill="#46606E" font-family="Figtree, system-ui, sans-serif" font-size="17" font-weight="600">
+        <text x="398" y="156">the brown ring:</text>
+        <text x="398" y="178">cells carrying</text>
+        <text x="398" y="200">MHC markers</text>
+        <text x="398" y="256">inside &mdash; white</text>
+        <text x="398" y="278" font-weight="400">blood cells</text>
+        <text x="194" y="50" font-weight="400">spleen tissue</text>
+      </g>
+
+      <g>
+        <rect x="44" y="416" width="90" height="5" fill="#46606E"/>
+        <text x="44" y="406" fill="#46606E" font-family="Figtree, system-ui, sans-serif"
+              font-size="16" font-weight="600">about 0.2 mm</text>
+      </g>
+    </svg>
+    <figcaption>
+      <b>The brown rings the follicle &mdash; it doesn&rsquo;t fill it</b>
+      <p>Those cells ring the outside, right where blood arriving in the spleen washes
+         past &mdash; a good place to stand if your job is checking what has come in.</p>
+    </figcaption>
+  </figure>
+
+  <!-- ============================================================ -->
+  <h2 class="section">What the markers do</h2>
+
+  <p>
+    An MHC marker is not a weapon. It is a <b>display stand</b>. A patrolling cell picks
+    up a scrap of whatever is drifting past &mdash; bacteria, virus, a broken piece of
+    cell &mdash; and holds it out on a marker for other immune cells to inspect.
+  </p>
+  <p>
+    Something that belongs in a dunnart? Walk on. Something that doesn&rsquo;t?
+  </p>
+
+  <p class="shout">&ldquo;GO GO GO! THIS IS THE TARGET!&rdquo;</p>
+
+  <!-- ============================================================ -->
+  <h2 class="section">Why variety wins</h2>
+
+  <p>
+    Every marker is a slightly different shape, and each one only grabs scraps that fit
+    it. The more different shapes a population carries between them, the more kinds of
+    stranger get noticed. Fewer shapes, more gaps.
+  </p>
+
+  <figure class="fig">
+    <svg class="plate" viewBox="0 0 600 450" role="img"
+         aria-label="Two rows of MHC catchers. The top row has five different shaped slots
+                     and one of them fits the invader. The bottom row has only two shapes
+                     and none fit, so the invader is missed.">
+      <rect x="0" y="0" width="600" height="450" fill="#FFFDF3"/>
+
+      <text x="34" y="46" fill="#00BC74" font-family="Figtree, system-ui, sans-serif"
+            font-size="19" font-weight="700">LOTS OF SHAPES</text>
+      <text x="34" y="70" fill="#6E7268" font-family="Figtree, system-ui, sans-serif"
+            font-size="16" font-weight="400">one of them fits &mdash; caught</text>
+
+      <g>
+        <rect x="34"  y="92" width="86" height="76" rx="12" fill="#FFFFFF" stroke="#46606E" stroke-width="3"/>
+        <path d="M62 92 L92 92 L77 116 Z" fill="#FFFDF3" stroke="#46606E" stroke-width="3"/>
+
+        <rect x="140" y="92" width="86" height="76" rx="12" fill="#FFFFFF" stroke="#46606E" stroke-width="3"/>
+        <rect x="166" y="92" width="34" height="24" fill="#FFFDF3" stroke="#46606E" stroke-width="3"/>
+
+        <rect x="246" y="92" width="86" height="76" rx="12" fill="#E7FBF2" stroke="#00BC74" stroke-width="4"/>
+        <circle cx="289" cy="98" r="17" fill="#FFFDF3" stroke="#00BC74" stroke-width="4"/>
+
+        <rect x="352" y="92" width="86" height="76" rx="12" fill="#FFFFFF" stroke="#46606E" stroke-width="3"/>
+        <path d="M378 92 L412 92 L404 114 L386 114 Z" fill="#FFFDF3" stroke="#46606E" stroke-width="3"/>
+
+        <rect x="458" y="92" width="86" height="76" rx="12" fill="#FFFFFF" stroke="#46606E" stroke-width="3"/>
+        <path d="M484 92 L518 92 L501 118 Z" fill="#FFFDF3" stroke="#46606E" stroke-width="3"
+              transform="rotate(180 501 105)"/>
+      </g>
+
+      <circle cx="289" cy="98" r="12" fill="#FF6D3A"/>
+      <g stroke="#00BC74" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M262 196 L276 210 L306 178"/>
+      </g>
+
+      <line x1="34" y1="238" x2="566" y2="238" stroke="#46606E" stroke-width="2" opacity=".2"/>
+
+      <text x="34" y="284" fill="#FF6D3A" font-family="Figtree, system-ui, sans-serif"
+            font-size="19" font-weight="700">ONLY A FEW SHAPES</text>
+      <text x="34" y="308" fill="#6E7268" font-family="Figtree, system-ui, sans-serif"
+            font-size="16" font-weight="400">nothing fits &mdash; the invader walks past</text>
+
+      <g>
+        <rect x="34"  y="330" width="86" height="76" rx="12" fill="#FFFFFF" stroke="#46606E" stroke-width="3"/>
+        <path d="M62 330 L92 330 L77 354 Z" fill="#FFFDF3" stroke="#46606E" stroke-width="3"/>
+
+        <rect x="140" y="330" width="86" height="76" rx="12" fill="#FFFFFF" stroke="#46606E" stroke-width="3"/>
+        <rect x="166" y="330" width="34" height="24" fill="#FFFDF3" stroke="#46606E" stroke-width="3"/>
+      </g>
+
+      <circle cx="330" cy="368" r="12" fill="#FF6D3A"/>
+      <g stroke="#FF6D3A" stroke-width="5" stroke-linecap="round">
+        <path d="M368 352 L400 384"/><path d="M400 352 L368 384"/>
+      </g>
+      <text x="424" y="374" fill="#6E7268" font-family="Figtree, system-ui, sans-serif"
+            font-size="17" font-weight="400">missed</text>
+    </svg>
+    <figcaption>
+      <b>Same invader, two populations</b>
+      <p>Variety in the genes behind these markers decides how much a whole species can
+         see coming.</p>
+    </figcaption>
+  </figure>
+
+  <!-- ============================================================ -->
+  <h2 class="section">Dasyuridae were dealt a small hand</h2>
+
+  <p>
+    Dunnarts and Tasmanian devils are both <b>Dasyuridae</b>, and between them they carry
+    fewer MHC shapes than most mammals. Marsupials reached Australia from South America
+    across Antarctica, and only some of them made the trip. Tasmania later cut its devils
+    off as an island population. Numbers have crashed more than once since. Each squeeze
+    is a <b>population bottleneck</b>, and variety lost in one does not come back.
+  </p>
+
+  <!-- ============================================================ -->
+  <h2 class="section">The devil&rsquo;s problem</h2>
+
+  <p>
+    Tasmanian devils are dying from a <b>facial cancer that spreads between animals</b>.
+    That is extraordinarily rare &mdash; cancer is normally stuck in the body it started
+    in. Devils bite each other's faces while feeding and mating, so living tumour cells
+    pass straight from one mouth into the next animal's wound. And because devils carry
+    so few different MHC shapes, those cells arrive looking like they belong. The alarm
+    never goes off.
+  </p>
+
+  <!-- ============================================================ -->
+  <h2 class="section">The good news</h2>
+
+  <div class="goodnews">
+    <p style="margin:0">
+      <b>You can teach an immune system to see something it has been ignoring.</b>
+      Researchers in Tasmania have been immunising devils against the facial tumour, and
+      trials are underway. The same thinking is being explored for protecting other
+      Australian wildlife &mdash; including vaccines hidden in baits.
+    </p>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2 class="section">Find out more</h2>
+
+  <ul class="links">
+    <li>
+      <a href="https://anatomypubs.onlinelibrary.wiley.com/doi/10.1002/ar.20896"
+         target="_blank" rel="noopener noreferrer">
+        The Anatomical Record &mdash; marsupial immune tissue
+        <span>anatomypubs.onlinelibrary.wiley.com</span>
+      </a>
+    </li>
+    <li>
+      <a href="https://theconversation.com/iconic-australian-mammals-could-be-at-real-risk-from-bird-flu-could-we-protect-them-using-vaccines-in-baits-290059"
+         target="_blank" rel="noopener noreferrer">
+        Could we protect Australian mammals with vaccines in baits?
+        <span>The Conversation</span>
+      </a>
+    </li>
+  </ul>
+
+  <footer>
+    GTAC &middot; Curious Minds. We use dunnarts because they are small, common and easy
+    to study &mdash; same family as devils. Diagrams are simplified on purpose.
+  </footer>
+
+</div>
+</body>
+</html>
